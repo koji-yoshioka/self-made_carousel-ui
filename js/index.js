@@ -9,20 +9,20 @@ const slider = (function () {
   const $imgContainerWidth = $('.js-slide-img-area');
 
   return {
-    prev: function () {
+    prev() {
       $('.js-slide-img-area:not(:animated)').prepend($('.slide-img-area__img:last-of-type'))   // 右端の要素を左端に移動させ、
         .css('margin-left', -1 * $('.slide-img-area__img').width())             // ネガティブマージンをつけておく(隠す為)
         .animate({ marginLeft: '0' }, DURATION);                                // 付与したネガティブマージンをアニメーションで0にすると、隠した要素が左から出てくる
     },
     // 単純にprevと反対の記述をさせればよいというわけではない
-    next: function () {
+    next() {
       $('.js-slide-img-area:not(:animated)').animate({ marginLeft: -1 * $('.slide-img-area__img').width() }, DURATION, function () {
         // 左端の画像要素を右端へ移動させる
         $('.js-slide-img-area').append($('.slide-img-area__img:first-of-type'));
         $('.js-slide-img-area').css('margin-left', '0');
       });
     },
-    init: function () {
+    init() {
       $imgContainerWidth.attr('style', 'width:' + $totalImgNum * $imgWidh + 'px');
       const that = this;
       // アイコンにイベントをバインド
