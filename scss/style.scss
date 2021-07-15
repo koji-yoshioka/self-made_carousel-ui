@@ -1,0 +1,32 @@
+.container {
+  width: 300px;
+  margin: 10vh auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-img-area {
+  // width: 300%;
+  display: flex;
+  &__img {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+.nav {
+  position: absolute;
+  top:115px;
+  font-size: 40px !important;
+  color: #FFF;
+  &:hover {
+    cursor: pointer;
+    z-index: 1;
+  }
+  &-left {
+    left: 0;
+  }
+  &-right {
+    right: 0;
+  }
+}
