@@ -13,6 +13,22 @@
   height: 300px;
 }
 
+.slide-btn-area {
+  width: 100%;
+  text-align: center;
+  letter-spacing: 0.5rem;
+}
+.slide-btn-area__btn {
+  background-color: #777;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.slide-btn-area__btn.selected {
+  opacity: 1;
+}
+
 .nav {
   position: absolute;
   top: 115px;

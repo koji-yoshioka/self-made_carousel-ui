@@ -6,13 +6,30 @@
 }
 
 .slide-img-area {
-  // width: 300%;
   display: flex;
   &__img {
     width: 300px;
     height: 300px;
   }
 }
+
+.slide-btn-area {
+  width: 100%;
+  text-align: center;
+  letter-spacing: 0.5rem;
+  &__btn {
+    background-color: #777;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    opacity: .5;
+    &.selected {
+      opacity: 1;
+    }
+  }
+}
+
+
 
 .nav {
   position: absolute;
