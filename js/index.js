@@ -13,21 +13,34 @@ $(function () {
     const $imgWidh = $('.js-slide-img-area__img').innerWidth();
     // 画像を格納するブロック要素
     const $imgContainerWidth = $('.js-slide-img-area');
-    // スライドボタンの要素数
-    const $totalBtnNum = $('.js-slide-btn-area__btn').length;
 
     return {
       prev() {
         $('.js-slide-img-area:not(:animated)').prepend($('.slide-img-area__img:last-of-type'))
           .css('margin-left', -1 * $('.slide-img-area__img').width())
-          .animate({ marginLeft: '0' }, DURATION);
+          .animate({ marginLeft: '0' }, DURATION, () => {
+            // dotボタンのselect属性を移す
+            // DOM走査した際、最初に取得したimgの画像IDを取得
+            const targetImgId = $('.js-slide-img-area__img:first').data('img-id');
+            // ボタンの「selected」を除去
+            $('.js-slide-btn-area__btn.selected').removeClass('selected');
+            // 対象ボタンに「selected」を追加
+            $($('.js-slide-btn-area__btn').get(targetImgId - 1)).addClass('selected');
+          });
       },
-
       next() {
         $('.js-slide-img-area:not(:animated)').animate({ marginLeft: -1 * $('.slide-img-area__img').width() }, DURATION, () => {
           // 左端の画像要素を右端へ移動させる
           $('.js-slide-img-area').append($('.slide-img-area__img:first-of-type'));
           $('.js-slide-img-area').css('margin-left', '0');
+
+          // dotボタンのselect属性を移す
+          // DOM走査した際、最初に取得したimgの画像IDを取得
+          const targetImgId = $('.js-slide-img-area__img:first').data('img-id');
+          // ボタンの「selected」を除去
+          $('.js-slide-btn-area__btn.selected').removeClass('selected');
+          // 対象ボタンに「selected」を追加
+          $($('.js-slide-btn-area__btn').get(targetImgId - 1)).addClass('selected');
         });
       },
       select(currentBtnIdx, targetBtnIdx) {
@@ -47,7 +60,7 @@ $(function () {
 
         if (moveNum > 0) {
           // 結果が正の場合は右へ移動
-          slidArea.animate({ marginLeft: -moveNum * $imgWidh }, 1000, () => {
+          slidArea.animate({ marginLeft: -moveNum * $imgWidh }, DURATION, () => {
             // IDが移動先の要素よりも小さいものは、順番に最後尾へ回す
             const elArray = [];
             for (let i = 1; i < targetImgId; i++) {
@@ -69,7 +82,7 @@ $(function () {
             slidArea.prepend(el)
               .css('margin-left', '-=' + $imgWidh);
           })
-          slidArea.animate({ marginLeft: '0' }, 1000);
+          slidArea.animate({ marginLeft: '0' }, DURATION);
         }
       },
       init() {
